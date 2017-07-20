@@ -1,5 +1,6 @@
 package message.impl;
 
+import conf.Defaults;
 import message.format.AbstractHttpMessage;
 import message.format.HttpResponse;
 import message.format.ResponseProcessor;
@@ -47,7 +48,7 @@ public final class HttpResponseImpl extends AbstractHttpMessage implements HttpR
     public void publish() {
 
 
-        headers.setHeader("Server", "Hinguloya WS");
+        headers.setHeader("Server", Defaults.serverName);
         headers.setHeader("Content-Length", String.valueOf(body.length()));
 
         // give the servlets to control their content-type

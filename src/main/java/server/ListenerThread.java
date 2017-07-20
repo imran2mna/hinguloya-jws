@@ -1,6 +1,5 @@
 package server;
 
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,7 +10,6 @@ import java.util.concurrent.Executors;
  * Created by imran on 1/29/17.
  */
 public class ListenerThread extends Thread {
-    private static Logger logger = Logger.getLogger(ListenerThread.class);
     private int port;
     private boolean isStopped = false;
     private ServerSocket serverSocket;
@@ -29,9 +27,9 @@ public class ListenerThread extends Thread {
 
             try {
                 serverSocket = new ServerSocket(this.port);
-                logger.info("Listening on port : " + this.port);
+                System.out.println("Listening on port : " + this.port);
             }catch (IOException e){
-                logger.error(e);
+                System.err.println(e);
                 doStop();
             }
 
@@ -41,10 +39,10 @@ public class ListenerThread extends Thread {
                     threadPool.execute(new ConnectionHandler(serverSocket.accept(), System.currentTimeMillis()));
                 } catch (IOException e){
                     if(isStopped){
-                        logger.debug("Server stopped...");
+                        System.err.println("Server stopped...");
                         break;
                     } else {
-                        logger.error("Error in accepting connection : " + e.getMessage());
+                        System.err.println("Error in accepting connection : " + e.getMessage());
                     }
                 }
             }
@@ -58,7 +56,7 @@ public class ListenerThread extends Thread {
             try {
                 serverSocket.close();
             } catch (IOException e) {
-                logger.info("Closing server socket : " + e.getMessage());
+                System.err.println("Closing server socket : " + e.getMessage());
             }
         }
     }

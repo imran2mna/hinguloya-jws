@@ -10,7 +10,7 @@ import java.io.FileReader;
  * Created by imran on 3/11/17.
  */
 final class StaticPage extends HttpServlet{
-    public String fileLocation;
+    public final String fileLocation;
 
     StaticPage(String fileLocation){
         this.fileLocation = fileLocation;
@@ -29,15 +29,31 @@ final class StaticPage extends HttpServlet{
 
 
     private void processRequest(HttpRequest request, HttpResponse response) {
+        FileReader fileReader = null;
+        BufferedReader br = null;
+        String line;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileLocation));
-            String line;
-            while ((line = br.readLine()) != null ){
+            fileReader = new FileReader(fileLocation);
+            br = new BufferedReader(fileReader);
+
+            while ((line = br.readLine()) != null) {
                 response.body().write(line);
             }
             br.close();
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

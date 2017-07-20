@@ -3,7 +3,6 @@ package message.impl;
 
 import message.format.AbstractHttpMessage;
 import message.format.HttpRequest;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +11,6 @@ import java.io.IOException;
  * Created by imran on 1/31/17.
  */
 public final class HttpRequestImpl extends AbstractHttpMessage implements HttpRequest {
-    private static Logger logger = Logger.getLogger(HttpRequestImpl.class);
     private final BufferedReader reader;
 
 
@@ -26,7 +24,7 @@ public final class HttpRequestImpl extends AbstractHttpMessage implements HttpRe
         try {
             protocol = new Protocol(reader.readLine());
         } catch (IOException e) {
-            logger.error(e);
+            System.err.println(e);
         }
     }
 

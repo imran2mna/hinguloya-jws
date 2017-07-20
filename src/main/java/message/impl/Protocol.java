@@ -1,7 +1,6 @@
 package message.impl;
 
 import message.format.HTTP;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -9,7 +8,6 @@ import java.util.*;
  * Created by imran on 1/31/17.
  */
 public class Protocol {
-    private static Logger logger = Logger.getLogger(Protocol.class);
     private String method;
     private String urlLocation;
     private String location;
@@ -79,12 +77,12 @@ public class Protocol {
                         queries.put(stMap.nextToken(), stMap.nextToken());
                     }
                 } catch (NoSuchElementException e) {
-                    logger.error("no such element found - " + urlLocation);
+                    System.err.println("no such element found - " + urlLocation);
                     throw e;
                 }
 
             }catch (Exception e){
-                logger.error("error for urlLocation - " + urlLocation);
+                System.err.println("error for urlLocation - " + urlLocation);
                 throw e;
             }
 

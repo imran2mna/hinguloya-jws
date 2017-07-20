@@ -1,7 +1,6 @@
 package server;
 
 import mechanism.RequestSwitcher;
-import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,7 +9,6 @@ import java.net.Socket;
  * Created by imran on 1/29/17.
  */
 public class ConnectionHandler implements Runnable {
-    private static Logger logger = Logger.getLogger(ConnectionHandler.class);
     private Socket clientSocket;
     private long t1;
     private InputStream inputStream;
@@ -41,14 +39,14 @@ public class ConnectionHandler implements Runnable {
 
 
         }catch(Exception e){
-            logger.error(e);
+            System.err.println(e);
         }finally {
             closeStream(inputStream);
             closeStream(outputStream);
         }
 
         long t2 = System.currentTimeMillis();
-        logger.info("Time elapsed : " + (t2-t1));
+        System.out.println("Time elapsed : " + (t2-t1));
     }
 
     private void closeStream(Closeable closeable){
@@ -56,7 +54,7 @@ public class ConnectionHandler implements Runnable {
             try{
                 closeable.close();
             }catch (IOException e){
-                logger.error("error in closing stream...");
+                System.err.println("error in closing stream...");
             }
         }
     }

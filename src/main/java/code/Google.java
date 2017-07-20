@@ -1,6 +1,6 @@
 package code;
 
-import conf.ConfigurationSettings;
+import conf.Configs;
 import mechanism.HttpServlet;
 import message.format.HTTP;
 import message.format.HttpRequest;
@@ -13,7 +13,7 @@ public class Google extends HttpServlet {
     @Override
     public void doGet(HttpRequest request, HttpResponse response) {
         response.setStatus(HTTP.NOT_FOUND);
-        response.body().write(ConfigurationSettings.deploymentFolder);
+        response.body().write(Configs.libFolder);
     }
 
     @Override

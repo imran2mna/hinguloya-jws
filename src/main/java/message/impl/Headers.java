@@ -1,6 +1,5 @@
 package message.impl;
 
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.Map;
  * Created by imran on 1/31/17.
  */
 public class Headers {
-    private static Logger logger = Logger.getLogger(Headers.class);
     private Map<String, String> headerMap;
     private String headersString;
 
@@ -47,7 +45,7 @@ public class Headers {
 
             this.headersString = sb.toString();
         }catch(Exception e){
-            logger.error(e);
+            System.err.println(e);
         }
     }
 
