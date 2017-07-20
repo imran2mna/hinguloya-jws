@@ -1,8 +1,9 @@
 package code;
 
 import mechanism.HttpServlet;
-import message.format.HttpRequest;
-import message.format.HttpResponse;
+import message.format.HTTP;
+import message.format.HTTPRequest;
+import message.format.HTTPResponse;
 
 /**
  * Created by imran on 2/4/17.
@@ -10,12 +11,14 @@ import message.format.HttpResponse;
 public class NotFound extends HttpServlet {
 
     @Override
-    public void doGet(HttpRequest request, HttpResponse response) {
+    public void doGet(HTTPRequest request, HTTPResponse response) {
+        response.setStatus(HTTP.NOT_FOUND);
+        response.setHeader("Content-Type", "text/html");
         response.body().write("Not found");
     }
 
     @Override
-    public void doPost(HttpRequest request, HttpResponse response) {
+    public void doPost(HTTPRequest request, HTTPResponse response) {
         doGet(request,response);
     }
 }

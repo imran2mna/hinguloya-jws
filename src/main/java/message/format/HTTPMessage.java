@@ -7,7 +7,7 @@ import message.impl.Protocol;
 /**
  * Created by imran on 1/31/17.
  */
-public interface HttpMessage {
+public interface HTTPMessage {
 
     public Protocol protocol();
     public Headers headers();

@@ -7,13 +7,13 @@ import message.impl.Protocol;
 /**
  * Created by imran on 1/31/17.
  */
-public abstract class AbstractHttpMessage implements HttpMessage {
+public abstract class AbstractHTTPMessage implements HTTPMessage {
     protected Protocol protocol;
     protected Headers headers;
     protected Body body;
 
 
-    public AbstractHttpMessage(){
+    public AbstractHTTPMessage(){
 
     }
 

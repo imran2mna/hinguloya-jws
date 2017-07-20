@@ -1,5 +1,6 @@
 package server;
 
+import conf.Configs;
 import mechanism.RequestSwitcher;
 
 import java.io.*;
@@ -24,8 +25,7 @@ public class ConnectionHandler implements Runnable {
     public void run() {
 
         try{
-            // get timeout configuration from property file
-            clientSocket.setSoTimeout(10000);
+            clientSocket.setSoTimeout(Configs.TIMEOUT);
 
             inputStream = clientSocket.getInputStream();
             outputStream = clientSocket.getOutputStream();

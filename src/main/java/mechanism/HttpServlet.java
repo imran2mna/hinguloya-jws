@@ -2,8 +2,8 @@ package mechanism;
 
 
 import message.format.HTTP;
-import message.format.HttpRequest;
-import message.format.HttpResponse;
+import message.format.HTTPRequest;
+import message.format.HTTPResponse;
 import message.format.ResponseProcessor;
 
 /**
@@ -11,7 +11,7 @@ import message.format.ResponseProcessor;
  */
 public abstract class HttpServlet {
 
-    final void process(HttpRequest request, HttpResponse response){
+    final void process(HTTPRequest request, HTTPResponse response){
         switch (request.method()) {
             case HTTP.GET:
                 doGet(request,response);
@@ -30,6 +30,6 @@ public abstract class HttpServlet {
         ((ResponseProcessor)response).publish();
     }
 
-    public abstract void doGet(HttpRequest request, HttpResponse response);
-    public abstract void doPost(HttpRequest request, HttpResponse response);
+    public abstract void doGet(HTTPRequest request, HTTPResponse response);
+    public abstract void doPost(HTTPRequest request, HTTPResponse response);
 }

@@ -19,11 +19,12 @@ public class Headers {
 
     public Headers() {
         headerMap = new HashMap<>();
+        // we need to set through pre allocated file
+        headerMap.put("Content-Type", "text/html");
     }
 
     public Headers(BufferedReader reader) {
         this();
-
 
         try {
 

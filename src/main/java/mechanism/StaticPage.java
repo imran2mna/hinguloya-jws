@@ -1,7 +1,7 @@
 package mechanism;
 
-import message.format.HttpRequest;
-import message.format.HttpResponse;
+import message.format.HTTPRequest;
+import message.format.HTTPResponse;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,17 +18,17 @@ final class StaticPage extends HttpServlet{
 
 
     @Override
-    public final void doGet(HttpRequest request, HttpResponse response) {
+    public final void doGet(HTTPRequest request, HTTPResponse response) {
         processRequest(request,response);
     }
 
     @Override
-    public final void doPost(HttpRequest request, HttpResponse response) {
+    public final void doPost(HTTPRequest request, HTTPResponse response) {
         processRequest(request,response);
     }
 
 
-    private void processRequest(HttpRequest request, HttpResponse response) {
+    private void processRequest(HTTPRequest request, HTTPResponse response) {
         FileReader fileReader = null;
         BufferedReader br = null;
         String line;

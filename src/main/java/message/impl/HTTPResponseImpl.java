@@ -1,8 +1,8 @@
 package message.impl;
 
-import conf.Defaults;
-import message.format.AbstractHttpMessage;
-import message.format.HttpResponse;
+import conf.Configs;
+import message.format.AbstractHTTPMessage;
+import message.format.HTTPResponse;
 import message.format.ResponseProcessor;
 
 import java.io.PrintWriter;
@@ -10,10 +10,10 @@ import java.io.PrintWriter;
 /**
  * Created by imran on 1/31/17.
  */
-public final class HttpResponseImpl extends AbstractHttpMessage implements HttpResponse, ResponseProcessor {
+public final class HTTPResponseImpl extends AbstractHTTPMessage implements HTTPResponse, ResponseProcessor {
     private PrintWriter printWriter;
 
-    public HttpResponseImpl(PrintWriter printWriter) {
+    public HTTPResponseImpl(PrintWriter printWriter) {
         this.printWriter = printWriter;
         super.initialize();
     }
@@ -46,13 +46,8 @@ public final class HttpResponseImpl extends AbstractHttpMessage implements HttpR
 
     @Override
     public void publish() {
-
-
-        headers.setHeader("Server", Defaults.serverName);
+        headers.setHeader("Server", Configs.SERVER_NAME);
         headers.setHeader("Content-Length", String.valueOf(body.length()));
-
-        // give the servlets to control their content-type
-        headers.setHeader("Content-Type", "text/html");
 
         for (char[] c : protocol.getWriteList()) {
             printWriter.write(c);

@@ -1,8 +1,8 @@
 package message.impl;
 
 
-import message.format.AbstractHttpMessage;
-import message.format.HttpRequest;
+import message.format.AbstractHTTPMessage;
+import message.format.HTTPRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,11 +10,11 @@ import java.io.IOException;
 /**
  * Created by imran on 1/31/17.
  */
-public final class HttpRequestImpl extends AbstractHttpMessage implements HttpRequest {
+public final class HTTPRequestImpl extends AbstractHTTPMessage implements HTTPRequest {
     private final BufferedReader reader;
 
 
-    public HttpRequestImpl(BufferedReader reader) {
+    public HTTPRequestImpl(BufferedReader reader) {
         this.reader = reader;
         super.initialize();
     }

@@ -1,6 +1,8 @@
 package server;
 
 
+import conf.Configs;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
@@ -14,8 +16,7 @@ public class ListenerThread extends Thread {
     private boolean isStopped = false;
     private ServerSocket serverSocket;
 
-    // configure thread pool size through property file
-    private ExecutorService threadPool = Executors.newFixedThreadPool(100);
+    private ExecutorService threadPool = Executors.newFixedThreadPool(Configs.NO_THREADS);
 
 
     public ListenerThread(int port) {

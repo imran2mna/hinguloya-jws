@@ -2,10 +2,11 @@ package mechanism;
 
 
 import code.NotFound;
-import message.format.HttpRequest;
-import message.format.HttpResponse;
-import message.impl.HttpRequestImpl;
-import message.impl.HttpResponseImpl;
+import conf.Configs;
+import message.format.HTTPRequest;
+import message.format.HTTPResponse;
+import message.impl.HTTPRequestImpl;
+import message.impl.HTTPResponseImpl;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -26,13 +27,12 @@ public class RequestSwitcher {
 
     public void doSwitch() {
 
-        HttpRequest httpRequest = new HttpRequestImpl(reader);
-        HttpResponse httpResponse = new HttpResponseImpl(writer);
+        HTTPRequest httpRequest = new HTTPRequestImpl(reader);
+        HTTPResponse httpResponse = new HTTPResponseImpl(writer);
 
         HttpServlet httpServlet = ContentStore.getServlet(httpRequest.location());
 
-        // use configuration property file for document root
-        httpServlet = (httpServlet == null) ? ContentStore.getStaticPage("/home/imran/", httpRequest.URLlocation()) : httpServlet;
+        httpServlet = (httpServlet == null) ? ContentStore.getStaticPage(Configs.DOCUMENT_ROOT, httpRequest.URLlocation()) : httpServlet;
         httpServlet = (httpServlet == null) ? new NotFound(): httpServlet;
 
 
