@@ -6,18 +6,22 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
-
+import java.util.HashMap;
 
 
 /**
  * Created by imran on 1/31/17.
  */
-public class ContentStore {
+class ContentStore {
     private static ApplicationContext context;
+    private static HashMap<String,ApplicationContext> contexts;
 
     static {
         try{
-            context = new ClassPathXmlApplicationContext("app-context.xml");}
+            context = new ClassPathXmlApplicationContext("app-context.xml");
+            contexts = new HashMap<>();
+
+        }
         catch (BeansException e){
             System.err.println("Error in app-context.xml initialize...");
             throw e;
@@ -27,11 +31,14 @@ public class ContentStore {
 
     private ContentStore(){}
 
-    public  static HttpServlet getServlet(String location){
+
+
+    static HttpServlet getServlet(String location){
         HttpServlet httpServlet = null;
 
 
         // use JAXB to map URL and beans
+        FolderStore.list();
 
         if(context != null) {
             try {
@@ -43,7 +50,7 @@ public class ContentStore {
         return httpServlet;
     }
 
-    public static StaticPage getStaticPage(String documentRoot, String urlLocation){
+    static StaticPage getStaticPage(String documentRoot, String urlLocation){
         StaticPage staticPage = null;
 
         File file = new File(documentRoot + urlLocation);
@@ -51,6 +58,13 @@ public class ContentStore {
             staticPage = new StaticPage(documentRoot + urlLocation);
         }
         return staticPage;
+    }
+
+
+    public static void loadContexts(){
+        contexts.clear();
+
+
     }
 
 }

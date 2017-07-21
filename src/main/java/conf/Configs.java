@@ -18,6 +18,11 @@ public final class Configs {
     public static int NO_THREADS = Defaults.NO_THREADS;
     public static int TIMEOUT = Defaults.TIMEOUT;
 
+
+    public static String getLibFolder(){
+        return libFolder;
+    }
+
     static {
         loadProperties();
     }
@@ -39,7 +44,7 @@ public final class Configs {
                 properties.load(inputStream);
 
                 for(String property: properties.stringPropertyNames()){
-                    getProperty(property);
+                    setProperty(property);
                 }
 
             } catch (FileNotFoundException e) {
@@ -60,7 +65,7 @@ public final class Configs {
 
     }
 
-    private static String getProperty(String key){
+    private static String setProperty(String key){
         String value = properties.getProperty(key);
 
         if (value != null && !value.trim().equals("")) {
