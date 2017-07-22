@@ -2,6 +2,7 @@ package mechanism;
 
 
 import code.NotFound;
+import code.PermissionDenied;
 import conf.Configs;
 import message.format.HTTPRequest;
 import message.format.HTTPResponse;
@@ -31,12 +32,13 @@ public class RequestSwitcher {
         HTTPResponse httpResponse = new HTTPResponseImpl(writer);
 
         HttpServlet httpServlet = ContentStore.getServlet(httpRequest.location());
-
-        httpServlet = (httpServlet == null) ? ContentStore.getStaticPage(Configs.DOCUMENT_ROOT, httpRequest.URLlocation()) : httpServlet;
-        httpServlet = (httpServlet == null) ? new NotFound(): httpServlet;
-
-
-        httpServlet.process(httpRequest,httpResponse);
+        if (httpRequest.location().contains("app-context.xml") || httpRequest.location().contains(".jar")) {
+            httpServlet = (httpServlet == null) ? new PermissionDenied() : httpServlet;
+        } else {
+            httpServlet = (httpServlet == null) ? ContentStore.getStaticPage(Configs.getLibFolder() + Configs.DOCUMENT_ROOT, httpRequest.URLlocation()) : httpServlet;
+        }
+        httpServlet = (httpServlet == null) ? new NotFound() : httpServlet;
+        httpServlet.process(httpRequest, httpResponse);
 
     }
 

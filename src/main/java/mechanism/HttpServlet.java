@@ -5,11 +5,13 @@ import message.format.HTTP;
 import message.format.HTTPRequest;
 import message.format.HTTPResponse;
 import message.format.ResponseProcessor;
+import org.apache.log4j.Logger;
 
 /**
  * Created by imran on 1/31/17.
  */
 public abstract class HttpServlet {
+    private static Logger logger = Logger.getLogger(HttpServlet.class);
 
     final void process(HTTPRequest request, HTTPResponse response){
         switch (request.method()) {
@@ -22,7 +24,7 @@ public abstract class HttpServlet {
                 break;
 
             default:
-                System.out.println("Not an implemented method...");
+                logger.debug("Not an implemented method...");
                 break;
 
         }

@@ -1,5 +1,6 @@
 package mechanism;
 
+import message.format.HTTP;
 import message.format.HTTPRequest;
 import message.format.HTTPResponse;
 
@@ -32,6 +33,7 @@ final class StaticPage extends HttpServlet{
         FileReader fileReader = null;
         BufferedReader br = null;
         String line;
+        response.setContentType(HTTP.getContentType(fileLocation.substring(fileLocation.indexOf('.') + 1)));
         try {
             fileReader = new FileReader(fileLocation);
             br = new BufferedReader(fileReader);
@@ -56,5 +58,7 @@ final class StaticPage extends HttpServlet{
             }
         }
     }
+
+
 
 }

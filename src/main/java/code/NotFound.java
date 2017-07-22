@@ -13,7 +13,7 @@ public class NotFound extends HttpServlet {
     @Override
     public void doGet(HTTPRequest request, HTTPResponse response) {
         response.setStatus(HTTP.NOT_FOUND);
-        response.setHeader("Content-Type", "text/html");
+        response.setContentType( "text/html");
         response.body().write("Not found");
     }
 

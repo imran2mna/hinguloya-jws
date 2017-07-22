@@ -39,8 +39,14 @@ public final class HTTPResponseImpl extends AbstractHTTPMessage implements HTTPR
         protocol.setStatus(status);
     }
 
+    @Override
     public void setHeader(String key, String value) {
         headers.setHeader(key, value);
+    }
+
+    @Override
+    public void setContentType(String type) {
+        headers.setHeader("Content-Type",type);
     }
 
 

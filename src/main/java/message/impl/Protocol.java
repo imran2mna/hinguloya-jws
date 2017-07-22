@@ -77,12 +77,12 @@ public class Protocol {
                         queries.put(stMap.nextToken(), stMap.nextToken());
                     }
                 } catch (NoSuchElementException e) {
-                    System.err.println("no such element found - " + urlLocation);
+                    //System.err.println("no such element found - " + urlLocation);
                     throw e;
                 }
 
             }catch (Exception e){
-                System.err.println("error for urlLocation - " + urlLocation);
+                //System.err.println("error for urlLocation - " + urlLocation);
                 throw e;
             }
 

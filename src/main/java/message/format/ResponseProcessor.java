@@ -4,5 +4,5 @@ package message.format;
  * Created by imran on 3/11/17.
  */
 public interface ResponseProcessor {
-    public void publish();
+    void publish();
 }

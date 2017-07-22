@@ -1,5 +1,7 @@
 package conf;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.URLDecoder;
 import java.util.Properties;
@@ -8,6 +10,7 @@ import java.util.Properties;
  * Created by imran on 3/26/17.
  */
 public final class Configs {
+    private static Logger logger = Logger.getLogger(Configs.class);
     private static final String propertyFile = "/conf/config.properties";
     private static String libFolder;
     private static Properties properties;
@@ -48,9 +51,9 @@ public final class Configs {
                 }
 
             } catch (FileNotFoundException e) {
-                System.err.println("File not found : " + libFolder + propertyFile);
+                logger.debug("File not found : " + libFolder + propertyFile);
             } catch (IOException e) {
-                System.err.println(e);
+                logger.error(e);
             } finally {
 
                 try {
@@ -58,7 +61,7 @@ public final class Configs {
                         inputStream.close();
                     }
                 } catch (IOException e) {
-
+                    logger.error(e);
                 }
             }
         }

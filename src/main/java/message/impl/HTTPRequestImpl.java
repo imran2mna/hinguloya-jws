@@ -24,7 +24,7 @@ public final class HTTPRequestImpl extends AbstractHTTPMessage implements HTTPRe
         try {
             protocol = new Protocol(reader.readLine());
         } catch (IOException e) {
-            System.err.println(e);
+
         }
     }
 

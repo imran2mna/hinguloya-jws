@@ -1,6 +1,9 @@
 package message.impl;
 
 
+import message.format.HTTP;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +22,8 @@ public class Headers {
 
     public Headers() {
         headerMap = new HashMap<>();
-        // we need to set through pre allocated file
-        headerMap.put("Content-Type", "text/html");
+        // set as default
+        headerMap.put("Content-Type", HTTP.TXT_HTML);
     }
 
     public Headers(BufferedReader reader) {
@@ -28,13 +31,13 @@ public class Headers {
 
         try {
 
-            if(!reader.ready()) return;
+            if (!reader.ready()) return;
 
             String headerLine;
             StringBuilder sb = new StringBuilder();
             while ((headerLine = reader.readLine()) != null && headerLine.length() != 0) {
                 headerMap.put(
-                        headerLine.substring(0,headerLine.indexOf(':')),
+                        headerLine.substring(0, headerLine.indexOf(':')),
                         headerLine.substring(headerLine.indexOf(':') + 1)
                 );
 
@@ -45,32 +48,30 @@ public class Headers {
             }
 
             this.headersString = sb.toString();
-        }catch(Exception e){
-            System.err.println(e);
+        } catch (Exception e) {
         }
     }
 
 
-    void setHeader(String key, String value){
-        headerMap.put(key,value);
+    void setHeader(String key, String value) {
+        headerMap.put(key, value);
     }
 
-    public String getHeader(String key){
+    public String getHeader(String key) {
         return headerMap.get(key);
     }
 
 
-
-    public String getHeadersString(){
+    public String getHeadersString() {
         return headersString;
     }
 
 
-    List<char []> getWriteList(){
+    List<char[]> getWriteList() {
         List<char[]> writeList = new ArrayList<>();
 
         StringBuilder sb;
-        for (Map.Entry<String,String > entry : headerMap.entrySet()) {
+        for (Map.Entry<String, String> entry : headerMap.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             sb = new StringBuilder();
@@ -81,20 +82,20 @@ public class Headers {
         return writeList;
     }
 
-    private void write(String s,List<char[]> writeList){
+    private void write(String s, List<char[]> writeList) {
         int len = s.length();
 
         char[] buff;
         int srcBegin = 0;
-        while(len > BUFFER_SIZE){
+        while (len > BUFFER_SIZE) {
             buff = new char[BUFFER_SIZE];
-            s.getChars(srcBegin,BUFFER_SIZE,buff,0);
+            s.getChars(srcBegin, BUFFER_SIZE, buff, 0);
             writeList.add(buff);
             len -= BUFFER_SIZE;
             srcBegin += BUFFER_SIZE;
         }
 
-        if(len > 0) {
+        if (len > 0) {
             buff = new char[len];
             s.getChars(srcBegin, len, buff, 0);
             writeList.add(buff);
